@@ -1,0 +1,12 @@
+[
+    {
+        "urn": "urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi_pipeline.main.mart_daily_summary,PROD)",
+        "name": "mart_daily_summary",
+        "type": "DATASET"
+    },
+    {
+        "urn": "urn:li:dashboard:(superset,cfo_revenue_dashboard)",
+        "name": "CFO Revenue Dashboard",
+        "type": "DASHBOARD"
+    }
+]
