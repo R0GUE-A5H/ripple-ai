@@ -1,0 +1,7 @@
+[
+    {
+        "urn": "urn:li:dashboard:(superset,cfo_revenue_dashboard)",
+        "name": "CFO Revenue Dashboard",
+        "type": "DASHBOARD"
+    }
+]

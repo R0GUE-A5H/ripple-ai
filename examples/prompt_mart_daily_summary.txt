@@ -1,0 +1,230 @@
+
+ROLE
+You are a senior Python Data Engineer responsible for repairing failed ETL pipelines.
+OBJECTIVE
+An automated DataHub AI agent has detected a freshness SLA breach and already completed the root-cause analysis.
+Your task is to generate a production-ready Python backfill script that repairs the broken dataset.
+================
+DISCOVERED FACTS (Authoritative - Use ONLY these facts)
+================
+Database
+---------
+Path:
+D:\Projects\datahub_hackathon\nyc-taxi\nyc_taxi_pipeline.db
+Source Dataset
+--------------
+Name:
+staging_trips
+Description:
+Raw source dataset containing records.
+Target Dataset
+--------------
+Name:
+mart_daily_summary
+Description:
+Target dataset.
+Freshness Analysis
+------------------
+Last successfully processed date:
+2016-03-01
+Latest available source date:
+2016-03-10
+Missing date range (inclusive):
+2016-03-02
+through
+2016-03-10
+Gap:
+9 days
+
+================
+SOURCE SCHEMA
+==================
+VendorID (TEXT) - No description
+tpep_pickup_datetime (TEXT) - No description
+tpep_dropoff_datetime (TEXT) - No description
+passenger_count (TEXT) - No description
+trip_distance (TEXT) - No description
+pickup_longitude (TEXT) - No description
+pickup_latitude (TEXT) - No description
+RateCodeID (TEXT) - No description
+store_and_fwd_flag (TEXT) - No description
+dropoff_longitude (TEXT) - No description
+dropoff_latitude (TEXT) - No description
+payment_type (TEXT) - No description
+fare_amount (TEXT) - No description
+extra (TEXT) - No description
+mta_tax (TEXT) - No description
+tip_amount (TEXT) - No description
+tolls_amount (TEXT) - No description
+improvement_surcharge (TEXT) - No description
+total_amount (TEXT) - No description
+trip_date (null) - No description
+trip_duration_min (null) - No description
+pipeline_status (null) - No description
+================
+TARGET SCHEMA
+=================
+[
+  {
+    "name": "trip_date",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "trip_count",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "total_fare",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "total_revenue",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "avg_fare",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "avg_distance",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "avg_passengers",
+    "type": "null",
+    "description": ""
+  },
+  {
+    "name": "avg_duration_min",
+    "type": "null",
+    "description": ""
+  }
+]
+====================
+TRANSFORMATION LOGIC
+=====================
+The target dataset is produced using the following business rules.
+
+Aggregate staging_trips by trip_date. Compute trip_count, total_fare and avg_passenger_count.
+
+------
+DATAHUB AGENT CONTEXT
+------
+The following structured context has already been
+assembled by the Ripple AI Agent Context Kit.
+Use it as the authoritative summary.
+
+{
+  "incident": {
+    "dataset": "mart_daily_summary",
+    "gap_days": 9
+  },
+  "repair": {
+    "source": "staging_trips",
+    "target": "mart_daily_summary",
+    "timestamp_column": "trip_date"
+  },
+  "metadata": {
+    "platform": "sqlite",
+    "source_table": "staging_trips",
+    "target_table": "mart_daily_summary",
+    "timestamp_column": "trip_date"
+  }
+}
+
+----------
+Instructions
+- Use this metadata for additional grounding.
+- If the schema retrieved through MCP contains extra details,
+  prefer it over assumptions.
+- Use previous dataset queries to better understand how this
+  dataset is consumed.
+- Never invent metadata that is not present in the MCP context.
+=================
+IMPLEMENTATION REQUIREMENTS
+=================
+1. Use ONLY Python's built-in sqlite3 module for database operations.
+
+2. Allowed standard library imports are limited to:
+   - sqlite3
+   - logging
+   - datetime
+   - time
+   - os
+   - sys
+   - pathlib
+   - contextlib
+   - typing
+   - collections
+   - itertools
+
+3. Do NOT import any third-party libraries.
+4. Connect to the SQLite database located at:
+D:\Projects\datahub_hackathon\nyc-taxi\nyc_taxi_pipeline.db
+
+5. Start a database transaction using BEGIN.
+6. Delete ONLY rows from "mart_daily_summary" whose trip_date falls inside the missing date range.
+7. Recompute the missing data for "mart_daily_summary" from "staging_trips" strictly according to the supplied Transformation Logic.
+8. Insert the recomputed rows into "mart_daily_summary".
+9. The INSERT statement MUST explicitly specify the destination columns.
+10. Use ONLY the columns listed in the Target Schema.
+11. Never reference columns that are not present in the Target Schema.
+12. Never invent:
+    - columns
+    - tables
+    - SQL functions
+    - business rules
+
+13. Every SQL statement must be syntactically valid SQLite.
+14. Use parameterized SQL placeholders (?) for every SQL parameter.
+15. Commit the transaction only if every operation succeeds.
+16. Roll back the transaction if any exception occurs.
+17. Always close the database connection.
+18. Use Python's logging module.
+Log at least:
+
+- Opening database
+- Transaction started
+- Rows deleted
+- Rows inserted
+- Commit successful
+- Rollback (if needed)
+- Database closed
+
+19. Include
+def main()
+and
+if __name__ == "__main__":
+    main()
+===============
+RESTRICTIONS
+===============
+Do NOT invent:
+- tables
+- columns
+- transformations
+- business logic
+
+Use ONLY:
+- Database Path
+- Source Dataset
+- Target Dataset
+- Target Schema
+- Transformation Logic
+- Freshness Analysis
+If the Transformation Logic describes row-level processing, generate row-level SQL.
+If the Transformation Logic describes aggregation, generate aggregation SQL.
+Never assume aggregations unless explicitly specified by the Transformation Logic.
+=======
+OUTPUT
+======
+Return ONLY executable Python code.
+Do NOT use Markdown.
+Do NOT explain your reasoning.
+Do NOT output any text besides the Python script.

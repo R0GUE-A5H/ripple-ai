@@ -1,0 +1,210 @@
+{
+    "entity": {
+        "result": [
+            {
+                "urn": "urn:li:dataset:(urn:li:dataPlatform:sqlite,nyc_taxi_pipeline.main.mart_daily_summary,PROD)",
+                "name": "nyc_taxi_pipeline.main.mart_daily_summary",
+                "platform": {
+                    "urn": "urn:li:dataPlatform:sqlite",
+                    "name": "sqlite"
+                },
+                "properties": {
+                    "name": "nyc_taxi_pipeline.main.mart_daily_summary",
+                    "customProperties": [
+                        {
+                            "key": "timestamp_column",
+                            "value": "trip_date"
+                        },
+                        {
+                            "key": "sla_days",
+                            "value": "1"
+                        },
+                        {
+                            "key": "dataset_role",
+                            "value": "mart"
+                        },
+                        {
+                            "key": "transformation_logic",
+                            "value": "Aggregate staging_trips by trip_date. Compute trip_count, total_fare and avg_passenger_count."
+                        }
+                    ]
+                },
+                "ownership": {
+                    "owners": [
+                        {
+                            "owner": {
+                                "urn": "urn:li:corpGroup:data_platform_team",
+                                "name": "data_platform_team"
+                            },
+                            "type": "DATAOWNER",
+                            "ownershipType": {
+                                "urn": "urn:li:ownershipType:__system__dataowner",
+                                "type": "CUSTOM_OWNERSHIP_TYPE"
+                            }
+                        }
+                    ]
+                },
+                "tags": {
+                    "tags": [
+                        {
+                            "tag": {
+                                "urn": "urn:li:tag:pipeline_stage",
+                                "properties": {
+                                    "name": "pipeline_stage",
+                                    "description": "Part of a multi-stage data pipeline (raw \u2192 staging \u2192 mart)."
+                                }
+                            }
+                        }
+                    ]
+                },
+                "glossaryTerms": {
+                    "terms": [
+                        {
+                            "term": {
+                                "urn": "urn:li:glossaryTerm:pipeline_stage",
+                                "hierarchicalName": "pipeline_stage",
+                                "properties": {
+                                    "name": "Pipeline Stage",
+                                    "description": "A step in a multi-stage data pipeline. Raw data is ingested, staging cleans and filters, mart aggregates for consumption. Each stage depends on its upstream \u2014 staleness propagates downstream.",
+                                    "termSource": "INTERNAL"
+                                },
+                                "parentNodes": {
+                                    "count": 0
+                                }
+                            }
+                        },
+                        {
+                            "term": {
+                                "urn": "urn:li:glossaryTerm:stale-data-do-not-use",
+                                "hierarchicalName": "stale-data-do-not-use",
+                                "properties": {
+                                    "name": "Stale Data - Do Not Use",
+                                    "description": "Automatically assigned by Ripple AI while downstream assets may contain stale data.",
+                                    "termSource": "INTERNAL"
+                                },
+                                "ownership": {
+                                    "owners": [
+                                        {
+                                            "owner": {
+                                                "urn": "urn:li:corpuser:__datahub_system"
+                                            },
+                                            "type": "TECHNICAL_OWNER",
+                                            "ownershipType": {
+                                                "urn": "urn:li:ownershipType:__system__technical_owner",
+                                                "type": "CUSTOM_OWNERSHIP_TYPE",
+                                                "info": {
+                                                    "name": "Technical Owner",
+                                                    "description": "Involved in the production, maintenance, or distribution of the asset(s)."
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "parentNodes": {
+                                    "count": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "subTypes": {
+                    "typeNames": [
+                        "Table"
+                    ]
+                },
+                "health": [
+                    {
+                        "type": "INCIDENTS",
+                        "status": "PASS"
+                    }
+                ],
+                "schemaMetadata": {
+                    "name": "main.mart_daily_summary",
+                    "platformUrn": "urn:li:dataPlatform:sqlite",
+                    "fields": [
+                        {
+                            "fieldPath": "avg_distance",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "avg_duration_min",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "avg_fare",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "avg_passengers",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "total_fare",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "total_revenue",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "trip_count",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        },
+                        {
+                            "fieldPath": "trip_date",
+                            "nativeDataType": "null",
+                            "nullable": true
+                        }
+                    ]
+                },
+                "relatedDocuments": {
+                    "start": 0,
+                    "count": 10,
+                    "total": 0
+                }
+            }
+        ]
+    },
+    "schema": [
+        {
+            "field": "avg_distance",
+            "type": "null"
+        },
+        {
+            "field": "avg_duration_min",
+            "type": "null"
+        },
+        {
+            "field": "avg_fare",
+            "type": "null"
+        },
+        {
+            "field": "avg_passengers",
+            "type": "null"
+        },
+        {
+            "field": "total_fare",
+            "type": "null"
+        },
+        {
+            "field": "total_revenue",
+            "type": "null"
+        },
+        {
+            "field": "trip_count",
+            "type": "null"
+        },
+        {
+            "field": "trip_date",
+            "type": "null"
+        }
+    ],
+    "queries": []
+}
