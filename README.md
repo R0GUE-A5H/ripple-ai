@@ -1,18 +1,20 @@
 # Ripple AI: Autonomous Self-Healing Data Pipelines
 
+The first multi-agent system that uses DataHub's context graph as its working memory to safely execute physical pipeline repairs.
+
 ![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
 ![DataHub](https://img.shields.io/badge/DataHub-MCP-orange.svg)
 ![LLM](https://img.shields.io/badge/LLM-Groq-green.svg)
 ![License](https://img.shields.io/badge/License-Apache%202.0-purple.svg)
 
 
-**Ripple AI** is an intelligent, multi-agent framework designed to detect, investigate, and automatically repair data pipeline failures before they impact downstream consumers. By deeply integrating with DataHub via Model Context Protocol (MCP), Ripple AI provides true "self-healing" capabilities for modern data stacks.
+Standard self-healing tools operate blindly on isolated logs. **Ripple AI** is a graph-native multi-agent framework that turns DataHub’s metadata catalog (via MCP) into an active working memory. Instead of just generating code snippets, Ripple AI uses the enterprise lineage graph to reason about root causes and safely execute physical database repairs in real time.
 
 ---
 
 ## The Problem
 
-Data pipelines break. When an upstream ETL job fails, it causes a ripple effect of stale data, breaking executive dashboards and downstream machine learning models. Data engineers often spend hours tracing lineage, writing backfill scripts, and manually updating data governance catalogs to warn users. 
+Data pipelines break silently, causing downstream data corruption across executive dashboards and ML models. Traditional tools lack situational awareness—they can't see the broader data topology. As a result, engineers spend hours manually mapping lineage graphs, assessing blast radius, writing backfills, and updating governance tags. AI couldn't safely resolve this until now because it lacked an active memory of the enterprise data stack. 
 
 ## The Solution: Ripple AI
 
@@ -117,10 +119,10 @@ python -u setup.py
 
 When running the process, look for the following steps in the console:
 
-*   **Detection:** Identifies that the `staging_trips` dataset is 9 days stale.
-*   **Blast Radius Analysis:** Traces downstream impacts (e.g., affecting `mart_daily_summary` and the `CFO Revenue Dashboard`).
-*   **Self-Healing:** Automatically generates and executes the Python backfill script.
-*   **Resolution:** Provides a simulated GitHub PR link and marks the DataHub incident as resolved.
+* **Contextual Anomaly Detection:** Reads DataHub assertion states to identify that `staging_trips` is 9 days stale.
+* **Graph Blast Radius Analysis:** Queries DataHub’s lineage graph via MCP to isolate downstream impact (`mart_daily_summary`, `CFO Revenue Dashboard`) and automatically applies `Stale Data` glossary tags to protect consumers.
+* **Safe Physical Remediation:** Prompts the LLM for backfill code, verifies script safety through an AST static-analysis sandbox, and executes the physical database repair with auto-rollback protection.
+* **Governance & Resolution:** Creates a GitHub PR with the fix, writes a permanent postmortem back into DataHub's context graph, and marks the incident resolved.
 
 ### 5. Safety & Guardrails
 *   **Code Sandboxing:** Ripple AI does not blindly run LLM-generated code.
