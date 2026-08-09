@@ -1,0 +1,16 @@
+# Never commit
+.env
+
+# Environment
+myenv/
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+
+# Logs & Databases
+*.log
+examples/*.log
+nyc-taxi/*.db
+*.db
+nyc-taxi/run.bat
