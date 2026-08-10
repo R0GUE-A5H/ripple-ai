@@ -70,7 +70,7 @@ Ripple AI is powered by a decentralized architecture of specialized agents:
 ## Getting Started
 
 ### Prerequisites
-* Python 3.11+
+* Python 3.11 or 3.12 (3.13+ not supported — numpy/spaCy-related build tooling issues)
 * A running instance of DataHub (`localhost:8080`)
 * Groq API Key( For live call)
 * GitHub Personal Access Token (for PR creation) [For live call]
